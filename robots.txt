@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://ishagupta.github.io/sitemap.xml
+Sitemap: https://ishagupta21.github.io/sitemap.xml
