@@ -60,6 +60,16 @@
           {% assign sorted_pages = site.pages | sort: 'nav_order' %}
           {% for p in sorted_pages %}
             {% if p.nav and p.autogen == null %}
+              {% assign nav_skip = false %}
+              {% if site.navbar_exclude %}
+                {% assign p_nav_link = p.permalink | default: '' %}
+                {% for ex in site.navbar_exclude %}
+                  {% if ex == p_nav_link %}
+                    {% assign nav_skip = true %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+              {% unless nav_skip %}
               {% if p.dropdown %}
                 {% assign has_active_child = false %}
                 {% for child in p.children %}
@@ -115,6 +125,7 @@
                   </a>
                 </li>
               {% endif %}
+              {% endunless %}
             {% endif %}
           {% endfor %}
           {% if site.search_enabled %}
